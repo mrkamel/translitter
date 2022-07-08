@@ -6,17 +6,17 @@ RSpec.describe Translitter do
   end
 
   it "transliterates using the default rules" do
-    expect(described_class.new.transliterate('åaÞèŦ')).to eq('aaTheT')
+    expect(described_class.new.transliterate("åaÞèŦ")).to eq("aaTheT")
   end
 
   it "does not transliterate using the default rules when the default rules are disabled and uses a replacement" do
-    expect(described_class.new(default_rules: false).transliterate('åaÞèŦ')).to eq('?a???')
-    expect(described_class.new(default_rules: false).transliterate('åaÞèŦ', replacement: 'x')).to eq('xaxxx')
+    expect(described_class.new(default_rules: false).transliterate("åaÞèŦ")).to eq("?a???")
+    expect(described_class.new(default_rules: false).transliterate("åaÞèŦ", replacement: "x")).to eq("xaxxx")
   end
 
   it "transliterates using the custom rules and default rules" do
-    translitter = described_class.new(custom_rules: { 'Ä' => 'Ae', 'ü' => 'ue' })
+    translitter = described_class.new(custom_rules: { "Ä" => "Ae", "ü" => "ue" })
 
-    expect(translitter.transliterate('åÄaÞèŦü')).to eq('aAeaTheTue')
+    expect(translitter.transliterate("åÄaÞèŦü")).to eq("aAeaTheTue")
   end
 end
