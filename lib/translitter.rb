@@ -34,15 +34,17 @@ class Translitter
     "Ž" => "Z", "ž" => "z"
   }.freeze
 
-  def initialize(default_rules: true, custom_rules: {})
+  def initialize(default_rules: true, custom_rules: {}, replacement: "?")
     @rules = {}
     @rules.merge!(DEFAULT_RULES) if default_rules
     @rules.merge!(custom_rules)
+
+    @replacement = replacement
   end
 
-  def transliterate(str, replacement: "?")
+  def transliterate(str, replacement: @replacement)
     str.gsub(/[^\x00-\x7f]/u) do |char|
-      @rules[char] || replacement
+      @rules[char] || replacement || char
     end
   end
 end

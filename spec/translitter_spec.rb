@@ -12,6 +12,8 @@ RSpec.describe Translitter do
   it "does not transliterate using the default rules when the default rules are disabled and uses a replacement" do
     expect(described_class.new(default_rules: false).transliterate("åaÞèŦ")).to eq("?a???")
     expect(described_class.new(default_rules: false).transliterate("åaÞèŦ", replacement: "x")).to eq("xaxxx")
+    expect(described_class.new(default_rules: false, replacement: "x").transliterate("åaÞèŦ")).to eq("xaxxx")
+    expect(described_class.new(default_rules: false, custom_rules: { "å" => "a", "é" => "e" }, replacement: nil).transliterate("åaÞèŦ")).to eq("aaÞèŦ")
   end
 
   it "transliterates using the custom rules and default rules" do

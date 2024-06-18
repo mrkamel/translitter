@@ -19,13 +19,19 @@ Using translitter is super easy. For german you'd e.g. do:
 ```ruby
 translitter = Translitter.new(
   default_rules: true,
-  custom_rules: { 'Ä' => 'Ae', 'Ö' => 'Oe', 'Ü' => 'Ue', 'ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'ß' => 'ss' }
+  custom_rules: { 'Ä' => 'Ae', 'Ö' => 'Oe', 'Ü' => 'Ue', 'ä' => 'ae', 'ö' => 'oe', 'ü' => 'ue', 'ß' => 'ss' },
+  replacement: "?"
 )
 
-translitter.transliterate("Äpfél") #=> "Aepfel"
+translitter.transliterate("Äpfél 🍎") #=> "Aepfel ?"
 ```
 
-The default rules are taken from `i18n-ruby`.
+The default rules are taken from `i18n-ruby`. If you pass `nil` as
+`replacement`, special characters will be kept in the result.
+
+```ruby
+translitter.transliterate("Äpfél 🍎", replacement: nil) #=> "Aepfel 🍎"
+```
 
 ## Development
 
