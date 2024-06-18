@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    translitter (1.0.0)
+    translitter (1.1.0)
 
 GEM
   remote: https://rubygems.org/
